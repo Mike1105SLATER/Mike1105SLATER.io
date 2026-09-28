@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Desconecta y Gana</title>
+
+<style>
+
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f8fb;
+    color:#183247;
+    line-height:1.5;
+}
+
+button{
+    font-family:inherit;
+}
+
+button:focus-visible{
+    outline:3px solid #f5b700;
+    outline-offset:3px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #dfe8f0;
+    padding:13px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 4px 18px rgba(11,53,88,.08);
+}
+
+
+/* LOGO */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:800;
+    color:#0b3558;
+    font-size:21px;
+    white-space:nowrap;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#1261a0,#1685d4);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    box-shadow:0 6px 14px rgba(18,97,160,.25);
+}
+
+
+/* =========================
+   MENÚ
+========================= */
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    background:#eef4f8;
+    padding:6px;
+    border-radius:17px;
+}
+
+nav button{
+    position:relative;
+    border:0;
+    background:transparent;
+    padding:10px 15px;
+    min-height:48px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+    color:#657586;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.nav-icon{
+    font-size:18px;
+    line-height:1;
+    transition:transform .2s ease;
+}
+
+
+/* HOVER */
+
+nav button:hover{
+    color:#1261a0;
+    background:#dff0ff;
+    transform:translateY(-2px);
+}
+
+nav button:hover .nav-icon{
+    transform:scale(1.15);
+}
+
+
+/* ACTIVO */
+
+nav button.active{
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        #1261a0,
+        #1685d4
+    );
+
+    box-shadow:
+        0 6px 15px rgba(18,97,160,.28);
+
+    transform:translateY(-1px);
+}
+
+nav button.active .nav-icon{
+    transform:scale(1.1);
+}
+
+
+/* PRESIONAR */
+
+nav button:active{
+    transform:scale(.95);
+}
+
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:35px 20px 60px;
+}
+
+.page{
+    display:none;
+    animation:fade .35s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    background:linear-gradient(
+        135deg,
+        #0b3558,
+        #1261a0,
+        #1685d4
+    );
+
+    color:white;
+    border-radius:28px;
+    padding:55px 45px;
+    display:grid;
+    grid-template-columns:1.4fr .8fr;
+    gap:30px;
+    align-items:center;
+    box-shadow:0 15px 35px rgba(11,53,88,.18);
+    margin-bottom:30px;
+}
+
+.hero h1{
+    font-size:45px;
+    line-height:1.1;
+    margin-bottom:18px;
+}
+
+.hero p{
+    font-size:18px;
+    opacity:.92;
+    max-width:650px;
+}
+
+.hero-card{
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:22px;
+    padding:25px;
+    text-align:center;
+    backdrop-filter:blur(10px);
+}
+
+.hero-card .big{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.hero-card h3{
+    font-size:22px;
+}
+
+
+/* =========================
+   BOTONES GENERALES
+========================= */
+
+.btn{
+    border:none;
+    border-radius:13px;
+    padding:13px 22px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-primary{
+    background:#1261a0;
+    color:white;
+    box-shadow:0 7px 16px rgba(18,97,160,.22);
+}
+
+.btn-primary:hover{
+    background:#0d548d;
+}
+
+.btn-light{
+    background:white;
+    color:#1261a0;
+}
+
+
+/* =========================
+   TARJETAS
+========================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e2eaf0;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 8px 22px rgba(16,52,75,.07);
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 14px 28px rgba(16,52,75,.11);
+}
+
+.card-icon{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:#e4f2ff;
+    color:#1261a0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.card h3{
+    margin-bottom:8px;
+    color:#0b3558;
+}
+
+
+/* =========================
+   TÍTULOS
+========================= */
+
+.section-title{
+    margin-bottom:25px;
+}
+
+.section-title h2{
+    color:#0b3558;
+    font-size:32px;
+    margin-bottom:5px;
+}
+
+.section-title p{
+    color:#6c7c89;
+}
+
+
+/* =========================
+   RETOS
+========================= */
+
+.challenge-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.challenge{
+    background:white;
+    border:2px solid #e4ebf1;
+    border-radius:20px;
+    padding:25px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.challenge:hover{
+    border-color:#1685d4;
+    transform:translateY(-4px);
+}
+
+.challenge.selected{
+    border-color:#1261a0;
+    background:#eef8ff;
+    box-shadow:0 8px 20px rgba(18,97,160,.12);
+}
+
+.challenge h3{
+    color:#0b3558;
+    margin-bottom:8px;
+}
+
+.challenge-time{
+    color:#1261a0;
+    font-weight:800;
+    font-size:20px;
+    margin-top:15px;
+}
+
+
+/* =========================
+   TEMPORIZADOR
+========================= */
+
+.timer-box{
+    margin-top:30px;
+    background:linear-gradient(135deg,#0b3558,#1261a0);
+    color:white;
+    padding:35px;
+    border-radius:25px;
+    text-align:center;
+}
+
+.timer{
+    font-size:65px;
+    font-weight:900;
+    margin:15px 0 25px;
+    letter-spacing:2px;
+}
+
+.timer-buttons{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+
+/* =========================
+   BARRA DE PROGRESO
+========================= */
+
+.progress-container{
+    background:#dce6ed;
+    border-radius:20px;
+    height:16px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#1261a0,#31a7ff);
+    border-radius:20px;
+    transition:width .4s ease;
+}
+
+
+/* =========================
+   RECOMPENSAS
+========================= */
+
+.reward-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.reward{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    border:1px solid #e2eaf0;
+    text-align:center;
+    box-shadow:0 8px 22px rgba(16,52,75,.07);
+}
+
+.reward-icon{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.reward h3{
+    color:#0b3558;
+}
+
+.points{
+    color:#1261a0;
+    font-weight:800;
+    margin:10px 0 15px;
+}
+
+
+/* =========================
+   PROGRESO
+========================= */
+
+.profile{
+    background:linear-gradient(135deg,#1261a0,#1685d4);
+    color:white;
+    padding:35px;
+    border-radius:25px;
+    margin-bottom:25px;
+}
+
+.profile h2{
+    font-size:30px;
+}
+
+.level{
+    margin-top:20px;
+}
+
+.level-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.stat{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    border:1px solid #e2eaf0;
+}
+
+.stat-number{
+    font-size:35px;
+    font-weight:900;
+    color:#1261a0;
+}
+
+.stat p{
+    color:#687987;
+}
+
+
+/* =========================
+   POUR
+========================= */
+
+.pour-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.pour-card{
+    background:white;
+    border-radius:20px;
+    padding:28px;
+    border-left:6px solid #1261a0;
+    box-shadow:0 8px 20px rgba(16,52,75,.07);
+}
+
+.pour-card h3{
+    color:#0b3558;
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.pour-number{
+    font-size:35px;
+    font-weight:900;
+    color:#1685d4;
+    margin-bottom:5px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:200;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-content{
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    max-width:450px;
+    width:100%;
+    text-align:center;
+    animation:pop .3s ease;
+}
+
+@keyframes pop{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.modal-icon{
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+.modal h2{
+    color:#0b3558;
+    margin-bottom:10px;
+}
+
+.modal p{
+    color:#687987;
+    margin-bottom:20px;
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#0b3558;
+    color:white;
+    padding:15px 20px;
+    border-radius:13px;
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:300;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#0b3558;
+    color:white;
+    text-align:center;
+    padding:30px 20px;
+    margin-top:20px;
+}
+
+footer p{
+    opacity:.85;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    header{
+        flex-direction:column;
+        gap:12px;
+        padding:12px 15px;
+    }
+
+    nav{
+        width:100%;
+        justify-content:space-between;
+        overflow-x:auto;
+    }
+
+    nav button{
+        flex:1;
+        min-width:105px;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .grid,
+    .challenge-grid,
+    .reward-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    main{
+        padding:25px 15px 45px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .logo-icon{
+        width:38px;
+        height:38px;
+    }
+
+    nav{
+        gap:4px;
+        padding:5px;
+    }
+
+    nav button{
+        flex-direction:column;
+        gap:3px;
+        min-width:72px;
+        padding:8px 5px;
+        min-height:58px;
+        font-size:11px;
+    }
+
+    .nav-icon{
+        font-size:20px;
+    }
+
+    .hero{
+        padding:35px 25px;
+        border-radius:22px;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .grid,
+    .challenge-grid,
+    .reward-grid,
+    .pour-grid,
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .timer{
+        font-size:48px;
+    }
+
+}
+
+
+/* =========================
+   REDUCCIÓN DE MOVIMIENTO
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        scroll-behavior:auto !important;
+        transition:none !important;
+        animation:none !important;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ⏱
+        </div>
+
+        <span>
+            Desconecta y Gana
+        </span>
+
+    </div>
+
+
+    <nav>
+
+        <button class="nav active" data-page="inicio">
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            <span>
+                Inicio
+            </span>
+
+        </button>
+
+
+        <button class="nav" data-page="retos">
+
+            <span class="nav-icon">
+                🎯
+            </span>
+
+            <span>
+                Retos
+            </span>
+
+        </button>
+
+
+        <button class="nav" data-page="recompensas">
+
+            <span class="nav-icon">
+                🎁
+            </span>
+
+            <span>
+                Recompensas
+            </span>
+
+        </button>
+
+
+        <button class="nav" data-page="progreso">
+
+            <span class="nav-icon">
+                📊
+            </span>
+
+            <span>
+                Mi progreso
+            </span>
+
+        </button>
+
+
+        <button class="nav" data-page="accesibilidad">
+
+            <span class="nav-icon">
+                ♿
+            </span>
+
+            <span>
+                Accesibilidad
+            </span>
+
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
+<main>
+
+
+<!-- =========================
+     INICIO
+========================= -->
+
+<section id="inicio" class="page active">
+
+    <div class="hero">
+
+        <div>
+
+            <h1>
+                Desconecta un poco.
+                Gana algo mejor.
+            </h1>
+
+            <p>
+                Una aplicación que convierte el tiempo sin celular
+                en retos, puntos y recompensas.
+            </p>
+
+            <br>
+
+            <button
+                class="btn btn-light"
+                onclick="goToPage('retos')">
+
+                🎯 Comenzar un reto
+
+            </button>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="big">
+                📱
+            </div>
+
+            <h3>
+                Menos pantalla,
+                más vida.
+            </h3>
+
+            <p>
+                Tú decides cuánto tiempo
+                quieres desconectarte.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="section-title">
+
+        <h2>
+            ¿Cómo funciona?
+        </h2>
+
+        <p>
+            Empieza de manera sencilla.
+        </p>
+
+    </div>
+
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎯
+            </div>
+
+            <h3>
+                Elige un reto
+            </h3>
+
+            <p>
+                Selecciona cuánto tiempo quieres
+                permanecer sin utilizar tu celular.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⏱
+            </div>
+
+            <h3>
+                Desconéctate
+            </h3>
+
+            <p>
+                Inicia el temporizador y aprovecha
+                ese tiempo para hacer otra actividad.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏆
+            </div>
+
+            <h3>
+                Gana puntos
+            </h3>
+
+            <p>
+                Al terminar tus retos recibirás puntos
+                que podrás utilizar en recompensas.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     RETOS
+========================= -->
+
+<section id="retos" class="page">
+
+    <div class="section-title">
+
+        <h2>
+            Elige tu reto
+        </h2>
+
+        <p>
+            Escoge el tiempo que quieres pasar desconectado.
+        </p>
+
+    </div>
+
+
+    <div class="challenge-grid">
+
+
+        <div
+            class="challenge"
+            data-minutes="5"
+            data-points="10">
+
+            <h3>
+                🌱 Reto rápido
+            </h3>
+
+            <p>
+                Empieza con una pequeña pausa.
+            </p>
+
+            <div class="challenge-time">
+                5 minutos · +10 puntos
+            </div>
+
+        </div>
+
+
+        <div
+            class="challenge"
+            data-minutes="15"
+            data-points="30">
+
+            <h3>
+                ☕ Reto tranquilo
+            </h3>
+
+            <p>
+                Tómate un descanso de las pantallas.
+            </p>
+
+            <div class="challenge-time">
+                15 minutos · +30 puntos
+            </div>
+
+        </div>
+
+
+        <div
+            class="challenge"
+            data-minutes="30"
+            data-points="60">
+
+            <h3>
+                🧘 Reto concentración
+            </h3>
+
+            <p>
+                Media hora completamente desconectado.
+            </p>
+
+            <div class="challenge-time">
+                30 minutos · +60 puntos
+            </div>
+
+        </div>
+
+
+        <div
+            class="challenge"
+            data-minutes="60"
+            data-points="120">
+
+            <h3>
+                🌙 Reto avanzado
+            </h3>
+
+            <p>
+                Una hora sin utilizar el celular.
+            </p>
+
+            <div class="challenge-time">
+                60 minutos · +120 puntos
+            </div>
+
+        </div>
+
+
+        <div
+            class="challenge"
+            data-minutes="120"
+            data-points="250">
+
+            <h3>
+                🔥 Reto extremo
+            </h3>
+
+            <p>
+                Dos horas para disfrutar el mundo real.
+            </p>
+
+            <div class="challenge-time">
+                120 minutos · +250 puntos
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="timer-box">
+
+        <h2>
+            Temporizador
+        </h2>
+
+        <p id="selectedChallenge">
+            Selecciona un reto para comenzar.
+        </p>
+
+
+        <div
+            id="timer"
+            class="timer">
+
+            00:00
+
+        </div>
+
+
+        <div class="timer-buttons">
+
+            <button
+                class="btn btn-light"
+                id="startBtn">
+
+                ▶ Iniciar
+
+            </button>
+
+
+            <button
+                class="btn btn-light"
+                id="pauseBtn">
+
+                ⏸ Pausar
+
+            </button>
+
+
+            <button
+                class="btn btn-light"
+                id="resetBtn">
+
+                ↻ Reiniciar
+
+            </button>
+
+        </div>
+
+
+        <br>
+
+
+        <div class="progress-container">
+
+            <div
+                id="challengeProgress"
+                class="progress-bar">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     RECOMPENSAS
+========================= -->
+
+<section id="recompensas" class="page">
+
+    <div class="section-title">
+
+        <h2>
+            Recompensas
+        </h2>
+
+        <p>
+            Utiliza tus puntos para desbloquear beneficios.
+        </p>
+
+    </div>
+
+
+    <div class="reward-grid">
+
+
+        <div class="reward">
+
+            <div class="reward-icon">
+                ☕
+            </div>
+
+            <h3>
+                Descanso especial
+            </h3>
+
+            <div class="points">
+                50 puntos
+            </div>
+
+            <button
+                class="btn btn-primary reward-btn"
+                data-cost="50">
+
+                Canjear
+
+            </button>
+
+        </div>
+
+
+
+        <div class="reward">
+
+            <div class="reward-icon">
+                🎧
+            </div>
+
+            <h3>
+                Música sin distracciones
+            </h3>
+
+            <div class="points">
+                100 puntos
+            </div>
+
+            <button
+                class="btn btn-primary reward-btn"
+                data-cost="100">
+
+                Canjear
+
+            </button>
+
+        </div>
+
+
+
+        <div class="reward">
+
+            <div class="reward-icon">
+                🎬
+            </div>
+
+            <h3>
+                Tiempo de entretenimiento
+            </h3>
+
+            <div class="points">
+                150 puntos
+            </div>
+
+            <button
+                class="btn btn-primary reward-btn"
+                data-cost="150">
+
+                Canjear
+
+            </button>
+
+        </div>
+
+
+
+        <div class="reward">
+
+            <div class="reward-icon">
+                🏆
+            </div>
+
+            <h3>
+                Recompensa especial
+            </h3>
+
+            <div class="points">
+                300 puntos
+            </div>
+
+            <button
+                class="btn btn-primary reward-btn"
+                data-cost="300">
+
+                Canjear
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     PROGRESO
+========================= -->
+
+<section id="progreso" class="page">
+
+    <div class="profile">
+
+        <h2>
+            Mi progreso
+        </h2>
+
+        <p>
+            Sigue avanzando para desbloquear nuevos niveles.
+        </p>
+
+
+        <div class="level">
+
+            <div class="level-info">
+
+                <span>
+                    Nivel <strong id="levelNumber">1</strong>
+                </span>
+
+                <span>
+                    <span id="xpText">0</span> / 500 XP
+                </span>
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div
+                    id="xpBar"
+                    class="progress-bar">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div
+                class="stat-number"
+                id="pointsDisplay">
+
+                0
+
+            </div>
+
+            <p>
+                Puntos disponibles
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div
+                class="stat-number"
+                id="completedDisplay">
+
+                0
+
+            </div>
+
+            <p>
+                Retos completados
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div
+                class="stat-number"
+                id="minutesDisplay">
+
+                0
+
+            </div>
+
+            <p>
+                Minutos desconectado
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     ACCESIBILIDAD / POUR
+========================= -->
+
+<section id="accesibilidad" class="page">
+
+    <div class="section-title">
+
+        <h2>
+            Accesibilidad y metodología POUR
+        </h2>
+
+        <p>
+            El diseño busca que diferentes personas puedan utilizar
+            el sitio de manera sencilla y comprensible.
+        </p>
+
+    </div>
+
+
+    <div class="pour-grid">
+
+
+        <div class="pour-card">
+
+            <div class="pour-number">
+                01
+            </div>
+
+            <h3>
+                Perceptible
+            </h3>
+
+            <p>
+                La información se presenta mediante textos claros,
+                botones visibles, iconos y suficiente contraste
+                entre el contenido y el fondo.
+            </p>
+
+        </div>
+
+
+
+        <div class="pour-card">
+
+            <div class="pour-number">
+                02
+            </div>
+
+            <h3>
+                Operable
+            </h3>
+
+            <p>
+                La navegación utiliza botones grandes y fáciles
+                de identificar. Las funciones principales pueden
+                utilizarse mediante teclado y diferentes dispositivos.
+            </p>
+
+        </div>
+
+
+
+        <div class="pour-card">
+
+            <div class="pour-number">
+                03
+            </div>
+
+            <h3>
+                Comprensible
+            </h3>
+
+            <p>
+                La página utiliza lenguaje sencillo, instrucciones
+                directas y una estructura organizada para que el
+                usuario pueda entender qué hacer.
+            </p>
+
+        </div>
+
+
+
+        <div class="pour-card">
+
+            <div class="pour-number">
+                04
+            </div>
+
+            <h3>
+                Robusto
+            </h3>
+
+            <p>
+                El sitio utiliza HTML semántico, botones reales
+                y una estructura adaptable a diferentes tamaños
+                de pantalla y tecnologías de asistencia.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>
+        Desconecta y Gana
+    </h3>
+
+    <p>
+        Una propuesta para convertir la desconexión digital
+        en una experiencia positiva.
+    </p>
+
+    <br>
+
+    <small>
+        Proyecto académico · Diseño inclusivo
+    </small>
+
+</footer>
+
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    id="modal"
+    class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-icon">
+            🎉
+        </div>
+
+        <h2 id="modalTitle">
+            ¡Excelente!
+        </h2>
+
+        <p id="modalMessage">
+            Has completado el reto.
+        </p>
+
+        <button
+            class="btn btn-primary"
+            onclick="closeModal()">
+
+            Continuar
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div
+    id="toast"
+    class="toast">
+
+    Acción realizada correctamente.
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   VARIABLES
+========================= */
+
+let points = 0;
+let completed = 0;
+let totalMinutes = 0;
+let xp = 0;
+
+let selectedMinutes = 0;
+let selectedPoints = 0;
+
+let remainingSeconds = 0;
+let totalSeconds = 0;
+
+let timerInterval = null;
+let running = false;
+
+
+/* =========================
+   CAMBIO DE PÁGINAS
+========================= */
+
+const navButtons = document.querySelectorAll(".nav");
+
+const pages = document.querySelectorAll(".page");
+
+
+navButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const page = button.dataset.page;
+
+        goToPage(page);
+
+    });
+
+});
+
+
+function goToPage(page){
+
+    pages.forEach(section => {
+
+        section.classList.remove("active");
+
+    });
+
+
+    const selectedPage =
+        document.getElementById(page);
+
+
+    if(selectedPage){
+
+        selectedPage.classList.add("active");
+
+    }
+
+
+    navButtons.forEach(button => {
+
+        button.classList.remove("active");
+
+    });
+
+
+    const activeButton =
+        document.querySelector(
+            `.nav[data-page="${page}"]`
+        );
+
+
+    if(activeButton){
+
+        activeButton.classList.add("active");
+
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   SELECCIÓN DE RETOS
+========================= */
+
+const challenges =
+    document.querySelectorAll(".challenge");
+
+
+challenges.forEach(challenge => {
+
+    challenge.addEventListener("click", () => {
+
+        challenges.forEach(item => {
+
+            item.classList.remove("selected");
+
+        });
+
+
+        challenge.classList.add("selected");
+
+
+        selectedMinutes =
+            Number(challenge.dataset.minutes);
+
+
+        selectedPoints =
+            Number(challenge.dataset.points);
+
+
+        totalSeconds =
+            selectedMinutes * 60;
+
+
+        remainingSeconds =
+            totalSeconds;
+
+
+        updateTimer();
+
+
+        document.getElementById("selectedChallenge").textContent =
+            `Reto seleccionado: ${selectedMinutes} minutos · +${selectedPoints} puntos`;
+
+
+        showToast(
+            "Reto seleccionado correctamente"
+        );
+
+    });
+
+});
+
+
+/* =========================
+   TEMPORIZADOR
+========================= */
+
+const timerElement =
+    document.getElementById("timer");
+
+const progressElement =
+    document.getElementById("challengeProgress");
+
+
+function updateTimer(){
+
+    const minutes =
+        Math.floor(remainingSeconds / 60);
+
+    const seconds =
+        remainingSeconds % 60;
+
+
+    timerElement.textContent =
+        String(minutes).padStart(2,"0")
+        + ":"
+        +
+        String(seconds).padStart(2,"0");
+
+
+    if(totalSeconds > 0){
+
+        const percentage =
+            ((totalSeconds - remainingSeconds)
+            / totalSeconds) * 100;
+
+
+        progressElement.style.width =
+            percentage + "%";
+
+    }
+
+}
+
+
+/* INICIAR */
+
+document.getElementById("startBtn")
+.addEventListener("click", () => {
+
+    if(selectedMinutes === 0){
+
+        showToast(
+            "Primero selecciona un reto"
+        );
+
+        return;
+
+    }
+
+
+    if(running){
+
+        return;
+
+    }
+
+
+    running = true;
+
+
+    timerInterval =
+        setInterval(() => {
+
+            remainingSeconds--;
+
+            updateTimer();
+
+
+            if(remainingSeconds <= 0){
+
+                clearInterval(timerInterval);
+
+                running = false;
+
+                completeChallenge();
+
+            }
+
+        },1000);
+
+});
+
+
+/* PAUSAR */
+
+document.getElementById("pauseBtn")
+.addEventListener("click", () => {
+
+    if(timerInterval){
+
+        clearInterval(timerInterval);
+
+    }
+
+    running = false;
+
+    showToast(
+        "Temporizador pausado"
+    );
+
+});
+
+
+/* REINICIAR */
+
+document.getElementById("resetBtn")
+.addEventListener("click", () => {
+
+    clearInterval(timerInterval);
+
+    running = false;
+
+    remainingSeconds =
+        totalSeconds;
+
+    updateTimer();
+
+    progressElement.style.width =
+        "0%";
+
+    showToast(
+        "Temporizador reiniciado"
+    );
+
+});
+
+
+/* =========================
+   COMPLETAR RETO
+========================= */
+
+function completeChallenge(){
+
+    points += selectedPoints;
+
+    completed++;
+
+    totalMinutes += selectedMinutes;
+
+    xp += selectedPoints;
+
+
+    updateStats();
+
+
+    document.getElementById("modalTitle")
+        .textContent =
+        "🎉 ¡Reto completado!";
+
+
+    document.getElementById("modalMessage")
+        .textContent =
+        `Ganaste ${selectedPoints} puntos y completaste ${selectedMinutes} minutos de desconexión.`;
+
+
+    document.getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+function updateStats(){
+
+    document.getElementById("pointsDisplay")
+        .textContent =
+        points;
+
+
+    document.getElementById("completedDisplay")
+        .textContent =
+        completed;
+
+
+    document.getElementById("minutesDisplay")
+        .textContent =
+        totalMinutes;
+
+
+    let level =
+        Math.floor(xp / 500) + 1;
+
+
+    let currentXP =
+        xp % 500;
+
+
+    document.getElementById("levelNumber")
+        .textContent =
+        level;
+
+
+    document.getElementById("xpText")
+        .textContent =
+        currentXP;
+
+
+    document.getElementById("xpBar")
+        .style.width =
+        (currentXP / 500 * 100) + "%";
+
+}
+
+
+/* =========================
+   CERRAR MODAL
+========================= */
+
+function closeModal(){
+
+    document.getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   RECOMPENSAS
+========================= */
+
+const rewardButtons =
+    document.querySelectorAll(".reward-btn");
+
+
+rewardButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const cost =
+            Number(button.dataset.cost);
+
+
+        if(points >= cost){
+
+            points -= cost;
+
+            updateStats();
+
+            showToast(
+                `Recompensa canjeada por ${cost} puntos`
+            );
+
+        }else{
+
+            showToast(
+                `Necesitas ${cost - points} puntos más`
+            );
+
+        }
+
+    });
+
+});
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimeout;
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimeout);
+
+
+    toastTimeout =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        },2500);
+
+}
+
+
+/* =========================
+   CERRAR MODAL AL DAR CLICK
+   FUERA
+========================= */
+
+document.getElementById("modal")
+.addEventListener("click", function(event){
+
+    if(event.target === this){
+
+        closeModal();
+
+    }
+
+});
+
+
+/* =========================
+   TECLA ESC
+========================= */
+
+document.addEventListener("keydown", event => {
+
+    if(event.key === "Escape"){
+
+        closeModal();
+
+    }
+
+});
+
+
+/* =========================
+   INICIALIZACIÓN
+========================= */
+
+updateTimer();
+
+updateStats();
+
+</script>
+
+
+</body>
+</html>
